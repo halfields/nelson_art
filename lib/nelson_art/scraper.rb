@@ -1,0 +1,2 @@
+class NelsonArt::Scraper
+end
