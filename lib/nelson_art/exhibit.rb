@@ -1,0 +1,2 @@
+class NelsonArt::Exhibit
+end
