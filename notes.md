@@ -2,7 +2,7 @@ After starting my CLi gem with a command line message of 'bin/nelson_art' the pr
 
 	-welcome statement and two other choices:
 		-the Nelson's weekly schedule(it's a little unusual, open Sat. and Sun. and  closed a couple of days during the week, plus hours of operation)
-		-menu of exhibit choices. after going to the exhibit choices, you are   presented with a number list of about 30 names of exhibits that are showing  at the Nelson now or in the near future.
+		-menu of exhibit choices. after going to the exhibit choices, you are   presented with a number list of about 20 names of exhibits that are showing  at the Nelson now or in the near future.
 
 	-select a number and you will be presented with the following exhibit information:
 		-name
