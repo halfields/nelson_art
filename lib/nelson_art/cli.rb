@@ -14,13 +14,13 @@ class NelsonArt::CLI
 	end
 
 	def first_choice
-		choice = gets.strip.upcase
+		choice = gets.strip.downcase
 		case choice
 		when "1"
 			nelson_schedule
 		when "2"
 			exhibit_list
-		when "3", "EXIT"
+		when "3", "exit"
 			goodbye
 		else
 			puts "I don't recognize your choice. Please enter a number, (1, 2, or 3)."
@@ -46,13 +46,35 @@ class NelsonArt::CLI
 		puts
 		puts "Enter 'back' to see the previous menu."
 		if gets.strip.upcase == "BACK"
-			welcome
+			call
 		end
 	end
 
 	def exhibit_list
-		puts "exhibit list"
-		welcome
+	  puts "The Nelson's current or upcoming list of exhibits:"
+	  list = NelsonArt::Scraper.scrape_exhibit_index_page
+	  list.each.with_index(1) {|exhibit, index| puts "#{index}. #{exhibit.name}"}
+	  puts "Enter a number for more information on an exhibit, or type exit to leave site."
+	  input = nil
+	  until input == "exit"
+	  	input = gets.strip.downcase
+		  if 1..(list.size).include?(input)
+		  	exhibit = NelsonArt::Scraper.scrape_exhibit_profile_page(list[input-1].url)
+		  	exhibit.display
+		  	puts "Would you like to see the list of exhibits again? Enter y or exit."
+		  	input = gets.strip.downcase
+		  	if input == "y"
+		  		exhibit_list
+		  	elsif input == "exit"
+		  		goodbye
+		  	else
+		  		puts "I don't recognize your choice. Enter y or exit"
+		  	end
+		  else
+		  	puts "I don't recognize your choice. Enter a number or 'exit'"
+		  end
+		end
+		goodbye
 	end
 
 	def goodbye
